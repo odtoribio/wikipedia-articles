@@ -16,6 +16,7 @@ exports.FeedController = void 0;
 const common_1 = require("@nestjs/common");
 const feed_service_1 = require("./feed.service");
 const feed_dto_1 = require("./dto/feed.dto");
+const article_dto_1 = require("./dto/article.dto");
 let FeedController = class FeedController {
     constructor(feedService) {
         this.feedService = feedService;
@@ -23,6 +24,12 @@ let FeedController = class FeedController {
     async getArticles(query) {
         const response = await this.feedService.getArticles(query);
         return response?.mostread?.articles || [];
+    }
+    async getArticle(query) {
+        const response = await this.feedService.getArticles(query);
+        const articles = response?.mostread?.articles || [];
+        const article = articles.find((art) => art.pageid.toString() === query.id);
+        return article || {};
     }
     async getArticlesTranslated(language) {
         return await this.feedService.getArticlesTranslated(language);
@@ -36,6 +43,13 @@ __decorate([
     __metadata("design:paramtypes", [feed_dto_1.FeedDto]),
     __metadata("design:returntype", Promise)
 ], FeedController.prototype, "getArticles", null);
+__decorate([
+    (0, common_1.Get)('article'),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [article_dto_1.ArticleDto]),
+    __metadata("design:returntype", Promise)
+], FeedController.prototype, "getArticle", null);
 __decorate([
     (0, common_1.Get)('translate/:language'),
     __param(0, (0, common_1.Param)('language')),

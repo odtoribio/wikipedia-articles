@@ -18,9 +18,10 @@ const Paragraph = styled.p`
 interface FeedProps {
   items: Articles[];
   itemsPerPage: number;
+  date: string;
 }
 
-const Feed: React.FC<FeedProps> = ({ items, itemsPerPage }) => {
+const Feed: React.FC<FeedProps> = ({ items, itemsPerPage, date }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
@@ -40,7 +41,10 @@ const Feed: React.FC<FeedProps> = ({ items, itemsPerPage }) => {
             key={index}
             thumbnail={item.thumbnail?.source || "https://via.placeholder.com/150"}
             title={item.normalizedtitle}
-            description={item.description || 'No description available.'} />
+            description={item.description || 'No description available.'}
+            pageId={item.pageid.toString()}
+            date={date} />
+            
         ))}
       </Container>
       <Pagination
