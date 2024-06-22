@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { FeedService } from './feed.service';
 import { FeedDto } from './dto/feed.dto';
 
@@ -7,8 +7,8 @@ export class FeedController {
   constructor(private feedService: FeedService) {}
 
   @Get()
-  async getArticles(@Body() dto: FeedDto) {
-    const response = await this.feedService.getArticles(dto);
+  async getArticles(@Query() query: FeedDto) {
+    const response = await this.feedService.getArticles(query);
     return response?.mostread?.articles || [];
   }
 

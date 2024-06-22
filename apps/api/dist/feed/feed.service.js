@@ -20,8 +20,8 @@ let FeedService = class FeedService {
     formatNumber(number) {
         return number.toString().padStart(2, '0');
     }
-    async getArticles(dto) {
-        const date = new Date(dto.date);
+    async getArticles(query) {
+        const date = new Date(query.date);
         const day = this.formatNumber(date.getDate() + 1);
         const month = this.formatNumber(date.getMonth() + 1);
         const year = date.getFullYear();
@@ -30,7 +30,17 @@ let FeedService = class FeedService {
         return response.data;
     }
     async getArticlesTranslated(language) {
-        return 'response';
+        const url = 'https://libretranslate.com/translate';
+        const data = JSON.stringify({
+            q: 'Hola mundo',
+            source: 'auto',
+            target: 'en',
+            format: 'text',
+            alternatives: 3,
+            api_key: '',
+        });
+        const response = await (0, rxjs_1.firstValueFrom)(this.httpService.post(url, data));
+        return response;
     }
 };
 exports.FeedService = FeedService;

@@ -5,6 +5,6 @@ export declare class FeedService {
     private httpService;
     constructor(httpService: HttpService);
     private formatNumber;
-    getArticles(dto: FeedDto): Promise<Response>;
+    getArticles(query: FeedDto): Promise<Response>;
     getArticlesTranslated(language: string): Promise<any>;
 }

@@ -1,3 +1,3 @@
-export interface FeedDto {
-    date: Date;
+export declare class FeedDto {
+    date: string;
 }

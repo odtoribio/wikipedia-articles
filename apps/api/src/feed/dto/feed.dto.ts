@@ -1,3 +1,5 @@
-export interface FeedDto {
-  date: Date;
+import { IsDateString } from 'class-validator';
+export class FeedDto {
+  @IsDateString()
+  date: string;
 }

@@ -12,8 +12,8 @@ export class FeedService {
     return number.toString().padStart(2, '0');
   }
 
-  async getArticles(dto: FeedDto): Promise<Response> {
-    const date = new Date(dto.date);
+  async getArticles(query: FeedDto): Promise<Response> {
+    const date = new Date(query.date);
     const day = this.formatNumber(date.getDate() + 1);
     const month = this.formatNumber(date.getMonth() + 1);
     const year = date.getFullYear();

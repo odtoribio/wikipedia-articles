@@ -15,12 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FeedController = void 0;
 const common_1 = require("@nestjs/common");
 const feed_service_1 = require("./feed.service");
+const feed_dto_1 = require("./dto/feed.dto");
 let FeedController = class FeedController {
     constructor(feedService) {
         this.feedService = feedService;
     }
-    async getArticles(dto) {
-        const response = await this.feedService.getArticles(dto);
+    async getArticles(query) {
+        const response = await this.feedService.getArticles(query);
         return response?.mostread?.articles || [];
     }
     async getArticlesTranslated(language) {
@@ -30,9 +31,9 @@ let FeedController = class FeedController {
 exports.FeedController = FeedController;
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [feed_dto_1.FeedDto]),
     __metadata("design:returntype", Promise)
 ], FeedController.prototype, "getArticles", null);
 __decorate([
