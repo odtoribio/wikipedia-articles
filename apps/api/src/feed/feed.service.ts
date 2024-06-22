@@ -19,9 +19,12 @@ export class FeedService {
     const year = date.getFullYear();
 
     const url = `https://api.wikimedia.org/feed/v1/wikipedia/en/featured/${year}/${month}/${day}`;
-
-    const response = await firstValueFrom(this.httpService.get(url));
-    return response.data;
+    try {
+      const response = await firstValueFrom(this.httpService.get(url));
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getArticlesTranslated(language: string): Promise<any> {
@@ -35,7 +38,11 @@ export class FeedService {
       api_key: '',
     });
 
-    const response = await firstValueFrom(this.httpService.post(url, data));
-    return response;
+    try {
+      const response = await firstValueFrom(this.httpService.post(url, data));
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

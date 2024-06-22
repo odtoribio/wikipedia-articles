@@ -26,8 +26,13 @@ let FeedService = class FeedService {
         const month = this.formatNumber(date.getMonth() + 1);
         const year = date.getFullYear();
         const url = `https://api.wikimedia.org/feed/v1/wikipedia/en/featured/${year}/${month}/${day}`;
-        const response = await (0, rxjs_1.firstValueFrom)(this.httpService.get(url));
-        return response.data;
+        try {
+            const response = await (0, rxjs_1.firstValueFrom)(this.httpService.get(url));
+            return response.data;
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
     async getArticlesTranslated(language) {
         const url = 'https://libretranslate.com/translate';
@@ -39,8 +44,13 @@ let FeedService = class FeedService {
             alternatives: 3,
             api_key: '',
         });
-        const response = await (0, rxjs_1.firstValueFrom)(this.httpService.post(url, data));
-        return response;
+        try {
+            const response = await (0, rxjs_1.firstValueFrom)(this.httpService.post(url, data));
+            return response;
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 };
 exports.FeedService = FeedService;
